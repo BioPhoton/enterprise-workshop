@@ -8,6 +8,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class PassengerSearchComponent implements OnInit {
 
+  activePane: number = 2;
+
   constructor() {
   }
 
