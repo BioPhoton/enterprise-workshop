@@ -1,6 +1,7 @@
 import {ExtraOptions, Routes} from '@angular/router';
 import {BasketComponent} from './basket/basket.component';
 import {HomeComponent} from './home/home.component';
+import {AuthGuard} from './shared/auth.guard';
 
 export const APP_ROUTES: Routes = [
   {
