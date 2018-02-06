@@ -1,5 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {ModuleWithProviders, NgModule} from '@angular/core';
+import {AirportService} from '@flight-workspace/flight-api/src/services/airport.service';
 import {FlightService} from './services/flight.service';
 
 @NgModule({
@@ -12,7 +13,8 @@ export class FlightApiModule {
     return {
       ngModule: FlightApiModule,
       providers: [
-        FlightService
+        FlightService,
+        AirportService
       ]
     }
   }
