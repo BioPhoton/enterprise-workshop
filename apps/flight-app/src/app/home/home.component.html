@@ -1,6 +1,7 @@
 <div class="card">
   <div class="header">
-    <h1 class="title">Welcome {{userName}}</h1>
+    <h1 *ngIf="userName">Welcome, {{userName}}!</h1>
+    <h1 *ngIf="!userName">Welcome!</h1>
   </div>
   <div class="content">
 
