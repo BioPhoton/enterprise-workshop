@@ -41,9 +41,11 @@ export class TabbedPaneComponent implements OnInit, OnDestroy, AfterContentInit 
   }
 
   ngOnInit(): void {
+
   }
 
   ngAfterContentInit(): void {
+    this.activate(this.activeId);
   }
 
   ngOnDestroy(): void {

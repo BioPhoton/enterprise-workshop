@@ -1,4 +1,4 @@
-<tabbed-pane [(activeId)]="activePane">
+<tabbed-pane [(activeId)]="activePane" #tp>
   <tab title="Booked" [id]="1" [active]="true">
     Passengers with booked flights.
   </tab>
@@ -8,6 +8,12 @@
   <tab title="Boarded" [id]="3" [active]="true">
     Passengers in the plane.
   </tab>
+
 </tabbed-pane>
+
+
+<div>
+  {{tp.currentTab.title}}
+</div>
 
 activePane: {{activePane}}
