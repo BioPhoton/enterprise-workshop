@@ -16,5 +16,7 @@
   ],
   "include": [
     "../**/*.ts"
-  ]
+  
+    , "../../../libs/hotels/index.ts"
+]
 }

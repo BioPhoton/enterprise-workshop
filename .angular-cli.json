@@ -77,6 +77,12 @@
       "appRoot": ""
     },
     {
+      "name": "hotels",
+      "root": "libs/hotels/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "logger",
       "root": "libs/logger/src",
       "test": "../../../test.js",

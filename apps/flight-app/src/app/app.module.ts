@@ -18,10 +18,12 @@ import {SidebarComponent} from './sidebar/sidebar.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FlightBookingModule,
     FlightApiModule.forRoot(),
     SharedModule.forRoot(),
-    RouterModule.forRoot([...APP_ROUTES], {...APP_EXTRA_OPTIONS})
+    RouterModule.forRoot([
+      {path: 'hotels', loadChildren: '@flight-workspace/hotels#HotelsModule'},
+      {path: 'flight-booking',  loadChildren: './flight-booking/flight-booking.module#FlightBookingModule'},
+      ...APP_ROUTES,], {...APP_EXTRA_OPTIONS})
   ],
   declarations: [
     AppComponent,
