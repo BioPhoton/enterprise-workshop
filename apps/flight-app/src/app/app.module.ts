@@ -3,7 +3,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
+import {ServiceWorkerModule} from '@angular/service-worker';
 import {FlightApiModule} from '@flight-workspace/flight-api';
+import {environment} from '../environments/environment';
 
 import {AppComponent} from './app.component';
 import {APP_EXTRA_OPTIONS, APP_ROUTES} from './app.routes';
@@ -23,7 +25,8 @@ import {SidebarComponent} from './sidebar/sidebar.component';
     RouterModule.forRoot([
       {path: 'hotels', loadChildren: '@flight-workspace/hotels#HotelsModule'},
       {path: 'flight-booking',  loadChildren: './flight-booking/flight-booking.module#FlightBookingModule'},
-      ...APP_ROUTES,], {...APP_EXTRA_OPTIONS})
+      ...APP_ROUTES,], {...APP_EXTRA_OPTIONS}),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   declarations: [
     AppComponent,
