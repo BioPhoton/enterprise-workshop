@@ -25,8 +25,7 @@ import {SidebarComponent} from './sidebar/sidebar.component';
     RouterModule.forRoot([
       {path: 'hotels', loadChildren: '@flight-workspace/hotels#HotelsModule'},
       {path: 'flight-booking',  loadChildren: './flight-booking/flight-booking.module#FlightBookingModule'},
-      ...APP_ROUTES,], {...APP_EXTRA_OPTIONS}),
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+      ...APP_ROUTES,], {...APP_EXTRA_OPTIONS})
   ],
   declarations: [
     AppComponent,
