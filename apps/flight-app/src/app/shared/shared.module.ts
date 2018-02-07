@@ -18,7 +18,7 @@ import {AuthService} from './services/auth.service';
   exports: [
     CityPipe,
   ],
-  providers: [AuthInterceptorService]
+  providers: []
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
