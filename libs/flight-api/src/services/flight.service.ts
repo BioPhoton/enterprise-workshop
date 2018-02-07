@@ -53,8 +53,14 @@ export class FlightService {
     let oldDate = new Date(oldFlight.date);
 
     // Mutable
-    oldDate.setTime(oldDate.getTime() + 15 * ONE_MINUTE);
-    oldFlight.date = oldDate.toISOString();
+    //oldDate.setTime(oldDate.getTime() + 15 * ONE_MINUTE);
+    //oldFlight.date = oldDate.toISOString();
+
+    // Immutable
+    let newDate = new Date(oldDate.getTime() + 15 * ONE_MINUTE);
+    let newFlight: Flight = { ...oldFlight, date: newDate.toISOString() };
+    let newFlights = [ newFlight, ...oldFlights.slice(1) ]
+    this.flights = newFlights;
   }
 
 }
