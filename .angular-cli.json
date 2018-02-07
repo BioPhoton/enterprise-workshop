@@ -1,10 +1,54 @@
 {
   "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
   "project": {
-    "name": "flight-workspace",
-    "npmScope": "flight-workspace",
-    "latestMigration": "20180103-update-command-line-scripts"
+    "name": "flight-workspace"
   },
+  "apps": [
+    {
+      "name": "flight-app",
+      "root": "apps/flight-app/src",
+      "outDir": "dist/apps/flight-app",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "../../../test.js",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "../../../tsconfig.spec.json",
+      "prefix": "app",
+      "serviceWorker": true,
+      "styles": [
+        "styles.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "name": "flight-api",
+      "appRoot": "",
+      "root": "libs/flight-api/src",
+      "test": "../../../test.js"
+    },
+    {
+      "name": "hotels",
+      "appRoot": "",
+      "root": "libs/hotels/src",
+      "test": "../../../test.js"
+    },
+    {
+      "name": "logger",
+      "appRoot": "",
+      "root": "libs/logger/src",
+      "test": "../../../test.js"
+    }
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
@@ -30,63 +74,19 @@
     }
   },
   "defaults": {
+    "styleExt": "css",
+    "component": {
+    },
     "schematics": {
       "collection": "@nrwl/schematics",
-      "postGenerate": "npm run format",
       "newProject": [
         "app",
         "lib"
-      ]
-    },
-    "styleExt": "css",
-    "component": {}
+      ],
+      "postGenerate": "npm run format"
+    }
   },
   "warnings": {
     "typescriptMismatch": false
-  },
-  "apps": [
-    {
-      "name": "flight-app",
-      "root": "apps/flight-app/src",
-      "outDir": "dist/apps/flight-app",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "../../../test.js",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "../../../tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "styles.css"
-      ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
-    },
-    {
-      "name": "flight-api",
-      "root": "libs/flight-api/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "hotels",
-      "root": "libs/hotels/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "logger",
-      "root": "libs/logger/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    }
-  ]
+  }
 }
