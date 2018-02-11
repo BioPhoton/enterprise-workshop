@@ -15,6 +15,9 @@ export class FlightEditComponent implements OnInit {
   sender: Observer<boolean>;
   showWarning = false;
 
+  sender: Observer<boolean>;
+  showWarning = false;
+
   constructor(private route: ActivatedRoute) {
   }
 
