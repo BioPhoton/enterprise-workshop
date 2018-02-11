@@ -33,10 +33,10 @@ export class FlightService {
     // let url = '/assets/data/data.json';
 
     // For online access
-    let url = [this.baseUrl + 'flight'].join('/');
+    let url = [this.baseUrl, 'flight'].join('/');
 
     if (urgent) {
-      url = [this.baseUrl +'error?code=403'].join('/');
+      url = [this.baseUrl,'error?code=403'].join('/');
     }
 
     let params = new HttpParams()
@@ -47,7 +47,8 @@ export class FlightService {
       .set('Accept', 'application/json');
 
     const reqObj = {params, headers};
-    return this.http.get<Flight>(url, reqObj);
+    console.log('url', url)
+    return this.http.get<Flight[]>(url, reqObj);
     // return of(flights).pipe(delay(this.reqDelay))
 
   }
@@ -55,13 +56,13 @@ export class FlightService {
   findById(id: string): Observable<Flight> {
     const reqObj = { params: null };
     reqObj.params = new HttpParams().set('id', id);
-    const url = [this.baseUrl + 'flight'].join('/');
+    const url = [this.baseUrl, 'flight'].join('/');
     return this.http.get<Flight>(url, reqObj);
     // return of(flights[0]).pipe(delay(this.reqDelay))
   }
 
   save(flight: Flight): Observable<Flight> {
-    const url = [this.baseUrl + 'flight'].join('/');
+    const url = [this.baseUrl, 'flight'].join('/');
     return this.http.post<Flight>(url, flight);
   }
 
