@@ -47,7 +47,6 @@ export class FlightService {
       .set('Accept', 'application/json');
 
     const reqObj = {params, headers};
-    console.log('url', url)
     return this.http.get<Flight[]>(url, reqObj);
     // return of(flights).pipe(delay(this.reqDelay))
 
