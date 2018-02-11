@@ -11,6 +11,7 @@ export class FlightService {
   }
 
   flights: Flight[] = [];
+  baseUrl: string = `http://www.angular.at/api`;
 
   load(from: string, to: string, urgent: boolean): void {
     this.find(from, to, urgent)
@@ -28,10 +29,10 @@ export class FlightService {
     // let url = '/assets/data/data.json';
 
     // For online access
-    let url = 'http://www.angular.at/api/flight';
+    let url = [this.baseUrl + 'flight'].join('/');
 
     if (urgent) {
-      url = 'http://www.angular.at/api/error?code=403';
+      url = [this.baseUrl +'error?code=403'].join('/');
     }
 
     let params = new HttpParams()
@@ -43,6 +44,18 @@ export class FlightService {
 
     return this.http.get<Flight[]>(url, {params, headers});
 
+  }
+
+  findById(id: string): Observable<Flight> {
+    const reqObj = { params: null };
+    reqObj.params = new HttpParams().set('id', id);
+    const url = [this.baseUrl + 'flight'].join('/');
+    return this.http.get<Flight>(url, reqObj);
+  }
+
+  save(flight: Flight): Observable<Flight> {
+    const url = [this.baseUrl + 'flight'].join('/');
+    return this.http.post<Flight>(url, flight);
   }
 
   delay() {
