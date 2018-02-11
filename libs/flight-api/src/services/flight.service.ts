@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 import {Flight} from '../models/flight';
+import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {of} from 'rxjs/observable/of';
 import {flights} from '@flight-workspace/flight-api/src/services/flight.data';
 import {delay} from 'rxjs/operators';
@@ -15,6 +17,23 @@ export class FlightService {
   flights: Flight[] = [];
   baseUrl: string = `http://www.angular.at/api`;
   reqDelay = 1000;
+
+  private flightsSubject: Subject<Flight[]> = new BehaviorSubject();
+  readonly flights$: Observable<Flight[]> = this.flightsSubject.asObservable();
+
+  private isFlightsPendingSubject: Subject<boolean> = new BehaviorSubject();
+  readonly isFlightsPending$: Observable<Flight> = this.isFlightsPendingSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+  }
+
+  setFlights$(flights: Flight[]) {
+    this.flightsSubject.next(flights);
+  }
+
+  setIsFlightPending$(isPending: boolean) {
+    this.isFlightsPendingSubject.next(isPending);
+  }
 
   private flightsSubject: Subject<Flight[]> = new BehaviorSubject();
   readonly flights$: Observable<Flight[]> = this.flightsSubject.asObservable();
