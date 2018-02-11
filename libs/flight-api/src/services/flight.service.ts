@@ -6,6 +6,8 @@ import {Flight} from '../models/flight';
 import {of} from 'rxjs/observable/of';
 import {flights} from '@flight-workspace/flight-api/src/services/flight.data';
 import {delay} from 'rxjs/operators';
+import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class FlightService {
@@ -14,16 +16,36 @@ export class FlightService {
   baseUrl: string = `http://www.angular.at/api`;
   reqDelay = 1000;
 
+  private flightsSubject: Subject<Flight[]> = new BehaviorSubject();
+  readonly flights$: Observable<Flight[]> = this.flightsSubject.asObservable();
+
+  private isFlightsPendingSubject: Subject<boolean> = new BehaviorSubject();
+  readonly isFlightsPending$: Observable<Flight> = this.isFlightsPendingSubject.asObservable();
+
   constructor(private http: HttpClient) {
   }
 
+  setFlights$(flights: Flight[]) {
+    this.flightsSubject.next(flights);
+  }
+
+  setIsFlightPending$(isPending: boolean) {
+    this.isFlightsPendingSubject.next(isPending);
+  }
+
   load(from: string, to: string, urgent: boolean): void {
+    this.setIsFlightPending$(true);
     this.find(from, to, urgent)
       .subscribe(
         flights => {
           this.flights = flights;
+          this.setIsFlightPending$(false);
+          this.setFlights$(flights)
         },
-        err => console.error('Error loading flights', err)
+        err => {
+          console.error('Error loading flights', err)
+          this.setIsFlightPending$(false);
+        }
       );
   }
 
@@ -75,6 +97,8 @@ export class FlightService {
     // Mutable
     oldDate.setTime(oldDate.getTime() + 15 * ONE_MINUTE);
     oldFlight.date = oldDate.toISOString();
+
+    this.setFlights$(this.flights)
   }
 
 }
