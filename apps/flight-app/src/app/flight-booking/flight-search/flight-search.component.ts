@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FlightService} from '@flight-workspace/flight-api';
+import {Flight, FlightService} from '@flight-workspace/flight-api';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'flight-search',
@@ -21,6 +22,14 @@ export class FlightSearchComponent implements OnInit {
     "3": true,
     "5": true
   };
+
+  get flights$(): Observable<Flight[]> {
+    return this.flightService.flights$;
+  }
+
+  get isFlightsPending$(): Observable<boolean> {
+    return this.flightService.isFlightsPending$;
+  }
 
   constructor(
     private flightService: FlightService) {
