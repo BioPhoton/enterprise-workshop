@@ -3,15 +3,19 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
 import {Flight} from '../models/flight';
+import {of} from 'rxjs/observable/of';
+import {flights} from '@flight-workspace/flight-api/src/services/flight.data';
+import {delay} from 'rxjs/operators';
 
 @Injectable()
 export class FlightService {
 
-  constructor(private http: HttpClient) {
-  }
-
   flights: Flight[] = [];
   baseUrl: string = `http://www.angular.at/api`;
+  reqDelay = 1000;
+
+  constructor(private http: HttpClient) {
+  }
 
   load(from: string, to: string, urgent: boolean): void {
     this.find(from, to, urgent)
@@ -42,7 +46,9 @@ export class FlightService {
     let headers = new HttpHeaders()
       .set('Accept', 'application/json');
 
-    return this.http.get<Flight[]>(url, {params, headers});
+    const reqObj = {params, headers};
+    return this.http.get<Flight>(url, reqObj);
+    // return of(flights).pipe(delay(this.reqDelay))
 
   }
 
@@ -51,6 +57,7 @@ export class FlightService {
     reqObj.params = new HttpParams().set('id', id);
     const url = [this.baseUrl + 'flight'].join('/');
     return this.http.get<Flight>(url, reqObj);
+    // return of(flights[0]).pipe(delay(this.reqDelay))
   }
 
   save(flight: Flight): Observable<Flight> {
