@@ -1,3 +1,8 @@
+export interface IncreaseBy {
+  type: 'INCREASE_BY';
+  payload: {amount: number};
+}
+
 export interface LoadData {
   type: 'LOAD_DATA';
   payload: {};
@@ -8,4 +13,4 @@ export interface DataLoaded {
   payload: {};
 }
 
-export type AppAction = LoadData | DataLoaded;
+export type AppAction = LoadData | DataLoaded | IncreaseBy;

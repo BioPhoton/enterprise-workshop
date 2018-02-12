@@ -21,6 +21,7 @@ import { AppEffects } from './+state/app.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import {DataPersistence} from '@nrwl/nx';
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     StoreRouterConnectingModule
   ],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, BasketComponent],
-  providers: [AppEffects],
+  providers: [AppEffects, DataPersistence],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

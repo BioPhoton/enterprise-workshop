@@ -5,6 +5,8 @@
   <div class="main-panel">
     <navbar-cmp></navbar-cmp>
     <div class="content">
+      count$: {{count$ | async}}
+      <button (click)="countUp()" class="btn btn-default">countUp</button>
 
       <router-outlet></router-outlet>
 
