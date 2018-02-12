@@ -37,7 +37,7 @@
     "@ngrx/store-devtools": "4.0.0",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
-    "@nrwl/nx": "0.6.10",
+    "@nrwl/nx": "0.6.18",
     "angular-oauth2-oidc": "^3.1.4",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.2",
