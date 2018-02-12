@@ -1,6 +1,6 @@
 export interface IncreaseBy {
   type: 'INCREASE_BY';
-  payload: {amount: number};
+  payload: { amount: number };
 }
 
 export interface LoadData {

@@ -7,7 +7,7 @@ export function appReducer(state: App, action: AppAction): App {
       return { ...state, ...action.payload };
     }
     case 'INCREASE_BY': {
-      return { ...state, count: (state.count + action.payload.amount) }
+      return { ...state, count: state.count + action.payload.amount };
     }
     default: {
       return state;

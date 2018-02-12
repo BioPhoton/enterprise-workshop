@@ -1,6 +1,6 @@
 export interface App {
   // define state here
-  count: number
+  count: number;
 }
 
 export interface AppState {

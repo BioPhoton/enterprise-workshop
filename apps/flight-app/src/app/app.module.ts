@@ -21,7 +21,7 @@ import { AppEffects } from './+state/app.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import {DataPersistence} from '@nrwl/nx';
+import { DataPersistence } from '@nrwl/nx';
 
 @NgModule({
   imports: [

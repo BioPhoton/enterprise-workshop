@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {DataPersistence} from '@nrwl/nx';
-import {AppState} from './+state/app.interfaces';
-import {getCount} from './+state/app.selectors';
+import { Observable } from 'rxjs/Observable';
+import { DataPersistence } from '@nrwl/nx';
+import { AppState } from './+state/app.interfaces';
+import { getCount } from './+state/app.selectors';
 
 @Component({
   selector: 'flight-app',
@@ -17,6 +17,6 @@ export class AppComponent {
   }
 
   countUp() {
-    this.s.store.dispatch({type: 'INCREASE_BY', payload: {amount: 1}})
+    this.s.store.dispatch({ type: 'INCREASE_BY', payload: { amount: 1 } });
   }
 }
