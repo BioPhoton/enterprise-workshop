@@ -1,7 +1,8 @@
 import {Flight} from '@flight-workspace/flight-api';
 export interface FlightBooking {
   // define state here
-  flights: Flight[]
+  flights: Flight[],
+  isFlightsPending: boolean
 }
 
 export interface FlightBookingState {

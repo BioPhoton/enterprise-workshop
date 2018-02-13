@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FlightService } from '@flight-workspace/flight-api';
+import {Component, OnInit} from '@angular/core';
+import {FlightService} from '@flight-workspace/flight-api';
 import {DataPersistence} from '@nrwl/nx';
 import {FlightBookingState} from '../+state/flight-booking.interfaces';
-import {getFlights} from '../+state/flight-booking.selectors';
+import {
+  getFlights,
+  getIsFlightsPending
+} from '../+state/flight-booking.selectors';
 
 @Component({
   selector: 'flight-search',
@@ -22,24 +25,30 @@ export class FlightSearchComponent implements OnInit {
     return this.s.store.select(getFlights);
   }
 
+  get pending$() {
+    return this.s.store.select(getIsFlightsPending);
+  }
+
+
   // "shopping basket" with selected flights
   basket: object = {
     '3': true,
     '5': true
   };
 
-  constructor(private flightService: FlightService, private s: DataPersistence<FlightBookingState>) {}
+  constructor(private flightService: FlightService, private s: DataPersistence<FlightBookingState>) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   search(): void {
     if (!this.from || !this.to) return;
 
-    this.flightService
-      .find(this.from, this.to, this.urgent)
-      .subscribe(
-        (flights) => { this.s.store.dispatch({type: "FLIGHTS_LOADED", payload: {flights}}); }
-      );
+    this.s.store.dispatch({
+      type: "LOAD_FLIGHTS",
+      payload: {from: this.from, to: this.to, urgent: this.urgent, isFlightsPending: true}
+    });
   }
 
   delay(): void {

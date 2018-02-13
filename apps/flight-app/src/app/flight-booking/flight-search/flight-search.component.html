@@ -22,11 +22,11 @@
 
         </label>
       </div>
-
+{{pending$ | async}}
       <div class="form-group">
         <button (click)="search()" [disabled]="!from || !to"
           class="btn btn-default">
-          Search
+          Search <b *ngIf="pending$ | async">pending</b>
         </button>
 
         <button *ngIf="flights.length > 0" class="btn btn-default"
