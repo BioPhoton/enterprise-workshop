@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FlightBookingComponent } from './flight-booking.component';
@@ -19,6 +19,7 @@ import { FlightBookingEffects } from './+state/flight-booking.effects';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule.forChild(),
     RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
     StoreModule.forFeature('flightBooking', flightBookingReducer, { initialState: flightBookingInitialState }),
