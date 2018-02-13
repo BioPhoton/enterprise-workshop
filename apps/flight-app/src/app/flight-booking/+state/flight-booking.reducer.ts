@@ -12,6 +12,9 @@ export function flightBookingReducer(state: FlightBooking, action: FlightBooking
     case 'FLIGHTS_ERROR': {
       return { ...state, ...action.payload };
     }
+    case 'FLIGHT_ERROR': {
+      return { ...state, ...action.payload };
+    }
     default: {
       return state;
     }

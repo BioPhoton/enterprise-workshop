@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {FlightService} from '@flight-workspace/flight-api';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {pluck, switchMap} from 'rxjs/operators';
+import {DataPersistence} from '@nrwl/nx';
+import {FlightBookingState} from '../+state/flight-booking.interfaces';
+import {Flight, FlightService} from '@flight-workspace/flight-api';
+import {Observable} from 'rxjs/Observable';
+import {getFlightErrorMessage} from '../+state/flight-booking.selectors';
 
 @Component({
   selector: 'app-flight-edit',
@@ -14,7 +19,13 @@ export class FlightEditComponent implements OnInit {
 
   editForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private flightService: FlightService) {
+  error$: Observable<string>
+
+  constructor(private route: ActivatedRoute,
+              private fb: FormBuilder,
+              private s: DataPersistence<FlightBookingState>,
+              private flightService: FlightService) {
+
     this.editForm = this.fb.group({
       'id': [],
       'from': [],
@@ -22,6 +33,7 @@ export class FlightEditComponent implements OnInit {
       'date': []
     })
 
+    this.error$ = this.s.store.select(getFlightErrorMessage)
   }
 
   ngOnInit() {
@@ -30,11 +42,17 @@ export class FlightEditComponent implements OnInit {
       this.showDetails = p['showDetails'];
     });
 
-    this.id$
+    this.route
+      .params
       .pipe(
-        switchMap(id => this.flightService.findById(id))
+        pluck('id'),
+        switchMap((id: string) => this.flightService.findById(id))
       )
       .subscribe(flight => this.editForm.patchValue(flight));
+  }
+
+  save(flight: Flight) {
+    this.s.store.dispatch({type: 'SAVE_FLIGHT', payload: {flight: flight} });
   }
 
 }

@@ -3,9 +3,11 @@ import {Actions, Effect} from '@ngrx/effects';
 import {DataPersistence} from '@nrwl/nx';
 import 'rxjs/add/operator/switchMap';
 import {of} from 'rxjs/observable/of';
-import {LoadFlights} from './flight-booking.actions';
+import {LoadFlights, SaveFlight} from './flight-booking.actions';
 import {FlightBookingState} from './flight-booking.interfaces';
 import {FlightService} from '@flight-workspace/flight-api';
+import {map, tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class FlightBookingEffects {
@@ -33,9 +35,39 @@ export class FlightBookingEffects {
     }
   });
 
+  @Effect()
+  saveFlight = this.dataPersistence.pessimisticUpdate('SAVE_FLIGHT', {
+    run: (action: SaveFlight, state: FlightBookingState) => {
+      console.log(`Action: SAVE_FLIGHT. action ${action}, state ${state}`)
+      return this.flightService.save(action.payload.flight)
+        .pipe(
+          tap(x => this.router.navigate(['./flight-booking/flight-search'])),
+          map(response => (
+            {
+              type: 'FLIGHT_SAVED',
+              payload: {response}
+            }
+          )
+        )
+        );
+    },
+
+    onError: (action: SaveFlight, error: any) => {
+      console.log(`Action: SAVE_FLIGHT. action ${action}, error ${error}`)
+
+      return {
+        type: 'FLIGHT_ERROR',
+        payload: {errorMessage: error.message}
+      };
+    }
+
+  });
+
   constructor(private actions: Actions,
+              private router: Router,
               private dataPersistence: DataPersistence<FlightBookingState>,
               private flightService: FlightService) {
 
   }
+
 }

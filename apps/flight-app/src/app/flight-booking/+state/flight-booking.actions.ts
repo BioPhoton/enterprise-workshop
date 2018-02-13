@@ -20,4 +20,30 @@ export interface FlightsError {
   };
 }
 
-export type FlightBookingAction = LoadFlights | FlightsLoaded | FlightsError;
+
+export interface SaveFlight {
+  type: 'SAVE_FLIGHT';
+  payload: {
+    flight: Flight,
+    saveFlightPending: boolean
+  };
+}
+
+export interface FlightSaved {
+  type: 'FLIGHT_SAVED';
+  payload: {
+    flight: Flight,
+    saveFlightPending: boolean
+  };
+}
+
+export interface FlightError {
+  type: 'FLIGHT_ERROR';
+  payload: {
+    flight: Flight,
+    saveFlightPending: boolean,
+    errorMessage: string
+  };
+}
+
+export type FlightBookingAction = LoadFlights | FlightsLoaded | FlightsError | SaveFlight | FlightSaved | FlightError;
