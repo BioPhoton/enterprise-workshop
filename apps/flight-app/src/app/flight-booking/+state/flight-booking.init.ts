@@ -4,5 +4,7 @@ export const flightBookingInitialState: FlightBooking = {
   // fill it initial state here
   flights: [],
   isFlightsPending: false,
-  errorMessage: ''
+  //
+  errorMessage: '',
+  isFlightPending: false
 };

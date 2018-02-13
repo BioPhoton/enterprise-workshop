@@ -22,3 +22,8 @@ export const getFlightErrorMessage= createSelector(
   getFlightBookingState,
   (state: FlightBooking) => state.errorMessage
 )
+
+export const getIsFlightPending = createSelector(
+  getFlightBookingState,
+  (state: FlightBooking) => state.isFlightPending
+)

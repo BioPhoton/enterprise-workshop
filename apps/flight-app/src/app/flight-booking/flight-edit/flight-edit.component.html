@@ -48,7 +48,9 @@
         </div>
       </div>
 
-      <button class="btn btn-outlined btn-primary" (click)="save(editForm.value)">Save</button>
+      <button class="btn btn-outlined btn-primary" (click)="save(editForm.value)">
+        Save <b *ngIf="isFlightPending$ | async">pending</b>
+      </button>
     </div>
 
   </div>

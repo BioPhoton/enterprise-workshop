@@ -45,7 +45,7 @@ export class FlightBookingEffects {
           map(response => (
             {
               type: 'FLIGHT_SAVED',
-              payload: {response}
+              payload: {response, isFlightPending: false}
             }
           )
         )
@@ -57,7 +57,7 @@ export class FlightBookingEffects {
 
       return {
         type: 'FLIGHT_ERROR',
-        payload: {errorMessage: error.message}
+        payload: {errorMessage: error.message, isFlightPending: false}
       };
     }
 

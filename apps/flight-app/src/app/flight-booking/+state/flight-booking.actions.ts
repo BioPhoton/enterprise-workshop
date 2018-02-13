@@ -24,24 +24,21 @@ export interface FlightsError {
 export interface SaveFlight {
   type: 'SAVE_FLIGHT';
   payload: {
-    flight: Flight,
-    saveFlightPending: boolean
+    isFlightPending: boolean
   };
 }
 
 export interface FlightSaved {
   type: 'FLIGHT_SAVED';
   payload: {
-    flight: Flight,
-    saveFlightPending: boolean
+    isFlightPending: boolean
   };
 }
 
 export interface FlightError {
   type: 'FLIGHT_ERROR';
   payload: {
-    flight: Flight,
-    saveFlightPending: boolean,
+    isFlightPending: boolean,
     errorMessage: string
   };
 }

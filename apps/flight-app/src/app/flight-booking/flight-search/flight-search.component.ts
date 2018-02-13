@@ -47,7 +47,7 @@ export class FlightSearchComponent implements OnInit {
 
     this.s.store.dispatch({
       type: "LOAD_FLIGHTS",
-      payload: {from: this.from, to: this.to, urgent: this.urgent, isFlightsPending: true}
+      payload: {from: this.from, to: this.to, urgent: this.urgent, isFlightPending: true}
     });
   }
 

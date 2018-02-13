@@ -6,7 +6,10 @@ import {DataPersistence} from '@nrwl/nx';
 import {FlightBookingState} from '../+state/flight-booking.interfaces';
 import {Flight, FlightService} from '@flight-workspace/flight-api';
 import {Observable} from 'rxjs/Observable';
-import {getFlightErrorMessage} from '../+state/flight-booking.selectors';
+import {
+  getFlightErrorMessage,
+  getIsFlightPending
+} from '../+state/flight-booking.selectors';
 
 @Component({
   selector: 'app-flight-edit',
@@ -19,7 +22,8 @@ export class FlightEditComponent implements OnInit {
 
   editForm: FormGroup;
 
-  error$: Observable<string>
+  error$: Observable<string>;
+  isFlightPending$: Observable<boolean>;
 
   constructor(private route: ActivatedRoute,
               private fb: FormBuilder,
@@ -33,7 +37,8 @@ export class FlightEditComponent implements OnInit {
       'date': []
     })
 
-    this.error$ = this.s.store.select(getFlightErrorMessage)
+    this.error$ = this.s.store.select(getFlightErrorMessage);
+    this.isFlightPending$ = this.s.store.select(getIsFlightPending);
   }
 
   ngOnInit() {
@@ -52,7 +57,7 @@ export class FlightEditComponent implements OnInit {
   }
 
   save(flight: Flight) {
-    this.s.store.dispatch({type: 'SAVE_FLIGHT', payload: {flight: flight} });
+    this.s.store.dispatch({type: 'SAVE_FLIGHT', payload: {flight: flight, isFlightPending: true} });
   }
 
 }

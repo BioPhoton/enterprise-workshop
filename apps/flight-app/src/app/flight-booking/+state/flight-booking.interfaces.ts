@@ -3,7 +3,9 @@ export interface FlightBooking {
   // define state here
   flights: Flight[],
   isFlightsPending: boolean,
-  errorMessage: string
+  //
+  errorMessage: string,
+  isFlightPending: boolean
 }
 
 export interface FlightBookingState {
