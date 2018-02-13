@@ -24,7 +24,9 @@ export interface FlightsError {
 export interface SaveFlight {
   type: 'SAVE_FLIGHT';
   payload: {
-    isFlightPending: boolean
+    isFlightPending: boolean,
+    flight: Flight,
+    oldFlight: Flight
   };
 }
 
@@ -40,7 +42,8 @@ export interface FlightError {
   type: 'FLIGHT_ERROR';
   payload: {
     isFlightPending: boolean,
-    errorMessage: string
+    errorMessage: string,
+    flight: Flight
   };
 }
 

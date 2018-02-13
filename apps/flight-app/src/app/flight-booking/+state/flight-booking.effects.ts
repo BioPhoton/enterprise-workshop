@@ -6,7 +6,7 @@ import {of} from 'rxjs/observable/of';
 import {LoadFlights, SaveFlight} from './flight-booking.actions';
 import {FlightBookingState} from './flight-booking.interfaces';
 import {FlightService} from '@flight-workspace/flight-api';
-import {map, tap} from 'rxjs/operators';
+import {map, startWith, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
 @Injectable()
@@ -35,6 +35,7 @@ export class FlightBookingEffects {
     }
   });
 
+  /*
   @Effect()
   saveFlight = this.dataPersistence.pessimisticUpdate('SAVE_FLIGHT', {
     run: (action: SaveFlight, state: FlightBookingState) => {
@@ -58,6 +59,44 @@ export class FlightBookingEffects {
       return {
         type: 'FLIGHT_ERROR',
         payload: {errorMessage: error.message, isFlightPending: false}
+      };
+    }
+
+  });
+  */
+
+  @Effect()
+  saveFlight = this.dataPersistence.optimisticUpdate('SAVE_FLIGHT', {
+
+    run: (action: SaveFlight, state: FlightBookingState) => {
+
+      return this.flightService
+        .save(action.payload.flight)
+        .pipe(
+          map(flight => (
+              {
+                type: 'FLIGHT_SAVED',
+                payload: {flight, isFlightPending: false}
+              }
+            )
+          ),
+          startWith({
+            type: 'FLIGHT_SAVED',
+            payload: {flight: action.payload.flight, isFlightPending: false}
+          }),
+          tap(x => this.router.navigate(['./flight-booking/flight-search']))
+        );
+    },
+
+    undoAction: (action: SaveFlight, error: any) => {
+      this.router.navigate(['./flight-booking/flight-edit/'+action.payload.oldFlight.id]);
+      return {
+        type: 'FLIGHT_ERROR',
+        payload: {
+          errorMessage: error.message,
+          isFlightPending: false,
+          flight: action.payload.oldFlight
+        }
       };
     }
 

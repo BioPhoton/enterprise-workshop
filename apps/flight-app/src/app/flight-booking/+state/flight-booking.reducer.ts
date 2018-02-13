@@ -14,20 +14,33 @@ export function flightBookingReducer(state: FlightBooking, action: FlightBooking
     }
     //
     case 'SAVE_FLIGHT': {
-      return { ...state, ...action.payload };
+      return {
+                ...state,
+                isFlightPending: action.payload.isFlightPending
+      };
     }
     case 'FLIGHT_SAVED': {
       const index = state.flights.findIndex(f => f.id === action.payload.flight.id);
       const updatedFlights = [...state.flights];
       updatedFlights[index] = action.payload.flight;
-
-      return { ...state,
-               ...action.payload,
+      return {
+                ...state,
+                isFlightPending:action.payload.isFlightPending,
                 flights: updatedFlights
              };
     }
     case 'FLIGHT_ERROR': {
-      return { ...state, ...action.payload };
+      console.log(action)
+      const index = state.flights.findIndex(f => f.id === action.payload.flight.id);
+      const updatedFlights = [...state.flights];
+      updatedFlights[index] = action.payload.flight;
+
+      return {
+          ...state,
+          flights: updatedFlights,
+          isFlightPending:action.payload.isFlightPending,
+          errorMessage: action.payload.errorMessage
+      };
     }
     default: {
       return state;

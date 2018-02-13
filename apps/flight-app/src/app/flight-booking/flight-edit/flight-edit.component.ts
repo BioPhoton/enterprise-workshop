@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {pluck, switchMap} from 'rxjs/operators';
+import {pluck, switchMap, tap} from 'rxjs/operators';
 import {DataPersistence} from '@nrwl/nx';
 import {FlightBookingState} from '../+state/flight-booking.interfaces';
 import {Flight, FlightService} from '@flight-workspace/flight-api';
@@ -24,6 +24,7 @@ export class FlightEditComponent implements OnInit {
 
   error$: Observable<string>;
   isFlightPending$: Observable<boolean>;
+  oldFlight: Flight;
 
   constructor(private route: ActivatedRoute,
               private fb: FormBuilder,
@@ -51,13 +52,21 @@ export class FlightEditComponent implements OnInit {
       .params
       .pipe(
         pluck('id'),
-        switchMap((id: string) => this.flightService.findById(id))
+        switchMap((id: string) => this.flightService.findById(id)),
+        tap(f => this.oldFlight = {...f})
       )
       .subscribe(flight => this.editForm.patchValue(flight));
   }
 
   save(flight: Flight) {
-    this.s.store.dispatch({type: 'SAVE_FLIGHT', payload: {flight: flight, isFlightPending: true} });
+    this.s.store.dispatch({
+      type: 'SAVE_FLIGHT',
+      payload: {
+        flight: flight,
+        oldFlight: this.oldFlight,
+        isFlightPending: true
+      }
+    });
   }
 
 }
