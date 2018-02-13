@@ -42,10 +42,10 @@ export class FlightBookingEffects {
       return this.flightService.save(action.payload.flight)
         .pipe(
           tap(x => this.router.navigate(['./flight-booking/flight-search'])),
-          map(response => (
+          map(flight => (
             {
               type: 'FLIGHT_SAVED',
-              payload: {response, isFlightPending: false}
+              payload: {flight, isFlightPending: false}
             }
           )
         )

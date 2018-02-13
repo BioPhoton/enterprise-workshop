@@ -17,7 +17,14 @@ export function flightBookingReducer(state: FlightBooking, action: FlightBooking
       return { ...state, ...action.payload };
     }
     case 'FLIGHT_SAVED': {
-      return { ...state, ...action.payload };
+      const index = state.flights.findIndex(f => f.id === action.payload.flight.id);
+      const updatedFlights = [...state.flights];
+      updatedFlights[index] = action.payload.flight;
+
+      return { ...state,
+               ...action.payload,
+                flights: updatedFlights
+             };
     }
     case 'FLIGHT_ERROR': {
       return { ...state, ...action.payload };

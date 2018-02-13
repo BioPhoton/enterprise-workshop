@@ -31,6 +31,7 @@ export interface SaveFlight {
 export interface FlightSaved {
   type: 'FLIGHT_SAVED';
   payload: {
+    flight: Flight,
     isFlightPending: boolean
   };
 }
