@@ -33,7 +33,9 @@ import { DataPersistence } from '@nrwl/nx';
     RouterModule.forRoot([...APP_ROUTES], { ...APP_EXTRA_OPTIONS }),
     StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
     EffectsModule.forRoot([AppEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument({
+      maxAge: 10
+    }) : [],
     StoreRouterConnectingModule
   ],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, BasketComponent],
