@@ -9,13 +9,15 @@ import {FlightCardComponent} from './flight-card/flight-card.component';
 import {FlightEditComponent} from './flight-edit/flight-edit.component';
 import {FlightSearchComponent} from './flight-search/flight-search.component';
 import {PassengerSearchComponent} from './passenger-search/passenger-search.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SharedModule.forChild(),
-    RouterModule.forChild(FLIGHT_BOOKING_ROUTES)
+    RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
+    TranslateModule.forChild()
   ],
   declarations: [
     FlightSearchComponent,
