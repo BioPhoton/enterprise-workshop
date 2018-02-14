@@ -1,6 +1,8 @@
 <div class="card">
   <div class="header">
-    <h1 class="title">Welcome {{userName}}</h1>
+    <h1 *ngIf="userName">Welcome, {{userName}}!</h1>
+    <h1 *ngIf="!userName">Welcome!</h1>
+
   </div>
   <div class="content">
 
@@ -9,8 +11,10 @@
       rights for the reqeusted action. Login with a respective user account!
     </div>
 
-    <button (click)="login()" class="btn btn-default">Login</button>
-    <button (click)="logout()" class="btn btn-default">Logout</button>
+
+
+        <button class="btn btn-default" (click)="login()">Login</button>
+        <button class="btn btn-default" (click)="logout()">Logout</button>
 
     <!--
     <tabbed-pane [activeId]="0">
