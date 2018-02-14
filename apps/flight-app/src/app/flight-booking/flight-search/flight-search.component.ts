@@ -6,6 +6,7 @@ import {
   getFlights,
   getIsFlightsPending
 } from '../+state/flight-booking.selectors';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'flight-search',
@@ -36,7 +37,7 @@ export class FlightSearchComponent implements OnInit {
     '5': true
   };
 
-  constructor(private flightService: FlightService, private s: DataPersistence<FlightBookingState>) {
+  constructor(private flightService: FlightService, private s: DataPersistence<FlightBookingState>, private router: Router) {
   }
 
   ngOnInit() {
@@ -45,10 +46,7 @@ export class FlightSearchComponent implements OnInit {
   search(): void {
     if (!this.from || !this.to) return;
 
-    this.s.store.dispatch({
-      type: "LOAD_FLIGHTS",
-      payload: {from: this.from, to: this.to, urgent: this.urgent, isFlightPending: true}
-    });
+    this.router.navigate(['./flight-booking/flight-search', {from: this.from, to: this.to, urgent: this.urgent, isFlightPending: true}])
   }
 
   delay(): void {

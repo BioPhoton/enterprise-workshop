@@ -7,7 +7,8 @@ import {LoadFlights, SaveFlight} from './flight-booking.actions';
 import {FlightBookingState} from './flight-booking.interfaces';
 import {FlightService} from '@flight-workspace/flight-api';
 import {map, startWith, tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import {ActivatedRouteSnapshot, Router} from '@angular/router';
+import {FlightSearchComponent} from '../flight-search/flight-search.component';
 
 @Injectable()
 export class FlightBookingEffects {
@@ -100,6 +101,22 @@ export class FlightBookingEffects {
       };
     }
 
+  });
+
+  @Effect()
+  navigateFlights = this.dataPersistence.navigation(FlightSearchComponent, {
+    run: (a: ActivatedRouteSnapshot, state: FlightBookingState) => {
+      console.log(a)
+      return {
+        type: 'LOAD_FLIGHTS',
+        payload: {from: a.params.from, to: a.params.to, isFlightPending: true}
+      };
+    },
+    onError: (a: ActivatedRouteSnapshot, e: any) => {
+      // we can log and error here and return null
+      // we can also navigate back
+      return null;
+    }
   });
 
   constructor(private actions: Actions,
