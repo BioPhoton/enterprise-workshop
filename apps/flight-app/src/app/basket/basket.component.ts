@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'basket',
@@ -6,9 +6,5 @@ import {Component} from '@angular/core';
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent {
-
-  constructor() {
-  }
-
-
+  constructor() {}
 }
