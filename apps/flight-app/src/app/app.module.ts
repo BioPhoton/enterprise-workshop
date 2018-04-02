@@ -29,16 +29,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
 }
 
-
-import { AppComponent } from './app.component';
-import { APP_EXTRA_OPTIONS, APP_ROUTES } from './app.routes';
-import { BasketComponent } from './basket/basket.component';
-import { FlightBookingModule } from './flight-booking/flight-booking.module';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SharedModule } from './shared/shared.module';
-import { SidebarComponent } from './sidebar/sidebar.component';
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -49,7 +39,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
     FlightBookingModule,
     FlightApiModule.forRoot(),
     SharedModule.forRoot(),
