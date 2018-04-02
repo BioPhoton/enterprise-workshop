@@ -1,13 +1,11 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'city',
   pure: true
 })
 export class CityPipe implements PipeTransform {
-
   transform(value: string, fmt: string): string {
-
     let short, long;
 
     switch (value) {
@@ -25,7 +23,5 @@ export class CityPipe implements PipeTransform {
 
     if (fmt == 'short') return short;
     return long;
-
   }
-
 }
