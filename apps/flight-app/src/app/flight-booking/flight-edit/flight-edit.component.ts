@@ -10,10 +10,6 @@ import { Observer } from 'rxjs/Observer';
 export class FlightEditComponent implements OnInit {
   id: string;
   showDetails: string;
-  showWarning = false;
-
-  sender: Observer<boolean>;
-  showWarning = false;
 
   sender: Observer<boolean>;
   showWarning = false;
