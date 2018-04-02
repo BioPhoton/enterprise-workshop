@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { LoggerService } from 'logger-lib';
 
 @Component({

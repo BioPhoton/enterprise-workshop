@@ -3,7 +3,7 @@
   "project": {
     "name": "flight-workspace",
     "npmScope": "flight-workspace",
-    "latestMigration": "20180103-update-command-line-scripts"
+    "latestMigration": "20180313-add-tags"
   },
   "e2e": {
     "protractor": {
@@ -29,21 +29,6 @@
       "config": "./karma.conf.js"
     }
   },
-  "defaults": {
-    "schematics": {
-      "collection": "@nrwl/schematics",
-      "postGenerate": "npm run format",
-      "newProject": [
-        "app",
-        "lib"
-      ]
-    },
-    "styleExt": "css",
-    "component": {}
-  },
-  "warnings": {
-    "typescriptMismatch": false
-  },
   "apps": [
     {
       "name": "flight-app",
@@ -68,19 +53,30 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
-      }
+      },
+      "tags": []
     },
     {
       "name": "flight-api",
       "root": "libs/flight-api/src",
       "test": "../../../test.js",
-      "appRoot": ""
+      "appRoot": "",
+      "tags": []
     },
     {
-      "name": "logger",
-      "root": "libs/logger/src",
-      "test": "../../../test.js",
+      "name": "$workspaceRoot",
+      "root": ".",
       "appRoot": ""
     }
-  ]
+  ],
+  "defaults": {
+    "schematics": {
+      "collection": "@nrwl/schematics"
+    },
+    "styleExt": "css",
+    "component": {}
+  },
+  "warnings": {
+    "typescriptMismatch": false
+  }
 }
