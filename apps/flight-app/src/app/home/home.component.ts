@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute) {
-  }
+  constructor(private route: ActivatedRoute) {}
 
   needsLogin: boolean;
   _userName: string = '';
@@ -24,12 +22,10 @@ export class HomeComponent implements OnInit {
   }
 
   login(): void {
-    this._userName = 'Login will be implemented in another exercise!'
+    this._userName = 'Login will be implemented in another exercise!';
   }
 
   logout(): void {
     this._userName = '';
   }
-
-
 }
