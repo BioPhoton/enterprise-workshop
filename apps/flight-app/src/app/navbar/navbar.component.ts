@@ -1,12 +1,11 @@
-import {Component} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'navbar-cmp',
   templateUrl: 'navbar.component.html'
 })
 export class NavbarComponent {
-
   private sidebarVisible: boolean = false;
 
   constructor(private translate: TranslateService) {

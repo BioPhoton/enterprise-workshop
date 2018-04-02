@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'flight-app',
@@ -12,6 +12,3 @@ export class AppComponent {
     this.translate.setDefaultLang('de');
     this.translate.use('de');
   }
-
-}
-
