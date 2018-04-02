@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { DataPersistence } from '@nrwl/nx';
 import { AppState } from './+state/app.interfaces';
@@ -10,6 +11,7 @@ import { getCount } from './+state/app.selectors';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   count$: Observable<number>;
 
   constructor(private s: DataPersistence<AppState>) {

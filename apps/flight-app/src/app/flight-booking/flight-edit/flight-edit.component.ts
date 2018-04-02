@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { pluck, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { FlightService } from '@flight-workspace/flight-api';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {pluck, switchMap, tap} from 'rxjs/operators';
 import {DataPersistence} from '@nrwl/nx';
@@ -16,8 +22,9 @@ import {
   templateUrl: './flight-edit.component.html'
 })
 export class FlightEditComponent implements OnInit {
-  id: string;
-  showDetails: string;
+  id$: Observable<string>;
+  showDetails$: Observable<string>;
+
   showWarning = false;
 
   editForm: FormGroup;
@@ -43,15 +50,11 @@ export class FlightEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(p => {
-      this.id = p['id'];
-      this.showDetails = p['showDetails'];
-    });
+    this.id$  = this.route.params.pipe(pluck('id'));
+    this.showDetails$  = this.route.params.pipe(pluck('showDetails'));
 
-    this.route
-      .params
+    this.id$
       .pipe(
-        pluck('id'),
         switchMap((id: string) => this.flightService.findById(id)),
         tap(f => this.oldFlight = {...f})
       )

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FlightService} from '@flight-workspace/flight-api';
-import {DataPersistence} from '@nrwl/nx';
-import {FlightBookingState} from '../+state/flight-booking.interfaces';
+import { Component, OnInit } from '@angular/core';
+import { FlightService } from '@flight-workspace/flight-api';
+import { DataPersistence } from '@nrwl/nx';
+import { FlightBookingState } from '../+state/flight-booking.interfaces';
 import {
   getFlights,
   getIsFlightsPending
@@ -14,9 +14,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./flight-search.component.css']
 })
 export class FlightSearchComponent implements OnInit {
-  from: string = 'Hamburg'; // in Germany
-  to: string = 'Graz'; // in Austria
-  urgent: boolean = false;
+  from= 'Hamburg'; // in Germany
+  to = 'Graz'; // in Austria
+  urgent = false;
 
   get flights() {
     return this.flightService.flights;
@@ -39,8 +39,11 @@ export class FlightSearchComponent implements OnInit {
 
   constructor(private flightService: FlightService, private s: DataPersistence<FlightBookingState>, private router: Router) {
   }
-
   ngOnInit() {
+  }
+
+  get isFlightsPending$(): Observable<boolean> {
+    return this.flightService.isFlightsPending$;
   }
 
   search(): void {
@@ -52,5 +55,4 @@ export class FlightSearchComponent implements OnInit {
   delay(): void {
     this.flightService.delay();
   }
-
 }
