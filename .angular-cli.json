@@ -1,7 +1,48 @@
 {
   "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
   "project": {
-    "name": "flight-workspace"
+    "name": "flight-workspace",
+    "npmScope": "flight-workspace",
+    "latestMigration": "20180103-update-command-line-scripts"
+  },
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "./tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "apps/flight-app/src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "apps/flight-app/e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "schematics": {
+      "collection": "@nrwl/schematics",
+      "postGenerate": "npm run format",
+      "newProject": [
+        "app",
+        "lib"
+      ]
+    },
+    "styleExt": "css",
+    "component": {}
+  },
+  "warnings": {
+    "typescriptMismatch": false
   },
   "apps": [
     {
@@ -32,9 +73,9 @@
     },
     {
       "name": "flight-api",
-      "appRoot": "",
       "root": "libs/flight-api/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "appRoot": ""
     },
     {
       "name": "hotels",
@@ -44,49 +85,9 @@
     },
     {
       "name": "logger",
-      "appRoot": "",
       "root": "libs/logger/src",
-      "test": "../../../test.js"
+      "test": "../../../test.js",
+      "appRoot": ""
     }
-  ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
-  "lint": [
-    {
-      "project": "./tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "apps/flight-app/src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "apps/flight-app/e2e/tsconfig.e2e.json",
-      "exclude": "**/node_modules/**"
-    }
-  ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
-  "defaults": {
-    "styleExt": "css",
-    "component": {
-    },
-    "schematics": {
-      "collection": "@nrwl/schematics",
-      "newProject": [
-        "app",
-        "lib"
-      ],
-      "postGenerate": "npm run format"
-    }
-  },
-  "warnings": {
-    "typescriptMismatch": false
-  }
+  ]
 }

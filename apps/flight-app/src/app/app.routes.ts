@@ -1,6 +1,6 @@
-import {ExtraOptions, PreloadAllModules, Routes} from '@angular/router';
-import {BasketComponent} from './basket/basket.component';
-import {HomeComponent} from './home/home.component';
+import { ExtraOptions, Routes, PreloadAllModules } from '@angular/router';
+import { BasketComponent } from './basket/basket.component';
+import { HomeComponent } from './home/home.component';
 
 export const APP_ROUTES: Routes = [
   {
@@ -21,7 +21,7 @@ export const APP_ROUTES: Routes = [
     path: '**',
     redirectTo: 'home'
   }
-]
+];
 
 export const APP_EXTRA_OPTIONS: ExtraOptions = {
   preloadingStrategy: PreloadAllModules
