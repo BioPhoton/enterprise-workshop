@@ -14,6 +14,7 @@ import {
 import { Flight } from '@flight-workspace/flight-api';
 
 @Component({
+  selector: 'flight-card',
   templateUrl: './flight-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
