@@ -10,25 +10,30 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { Flight } from '@flight-workspace/flight-api';
+import {Flight} from '@flight-workspace/flight-api';
 
 @Component({
   selector: 'flight-card',
-  templateUrl: './flight-card.component.html'
+  templateUrl: './flight-card.component.html',
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
+
   @Input() item: Flight;
   @Input() selected: boolean;
   @Output() selectedChange = new EventEmitter<boolean>();
 
-  constructor(private element: ElementRef, private zone: NgZone) {}
+  constructor(private element: ElementRef, private zone: NgZone) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+  }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+  }
 
   select() {
     this.selected = true;
@@ -54,4 +59,6 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
 
     return null;
   }
+
+
 }

@@ -1,34 +1,34 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Flight } from '../models/flight';
-import { of } from 'rxjs/observable/of';
-import { flights } from '@flight-workspace/flight-api/src/services/flight.data';
-import { delay } from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
+import {Flight} from '../models/flight';
+import {of} from 'rxjs/observable/of';
+import {flights} from '@flight-workspace/flight-api/src/services/flight.data';
+import {delay} from 'rxjs/operators';
 
 @Injectable()
 export class FlightService {
+
   flights: Flight[] = [];
   baseUrl: string = `http://www.angular.at/api`;
   reqDelay = 1000;
 
-  constructor(private http: HttpClient) {}
-
-  load(from: string, to: string, urgent: boolean): void {
-    this.find(from, to, urgent).subscribe(
-      flights => {
-        this.flights = flights;
-      },
-      err => console.error('Error loading flights', err)
-    );
+  constructor(private http: HttpClient) {
   }
 
-  find(
-    from: string,
-    to: string,
-    urgent: boolean = false
-  ): Observable<Flight[]> {
+  load(from: string, to: string, urgent: boolean): void {
+    this.find(from, to, urgent)
+      .subscribe(
+        flights => {
+          this.flights = flights;
+        },
+        err => console.error('Error loading flights', err)
+      );
+  }
+
+  find(from: string, to: string, urgent: boolean = false): Observable<Flight[]> {
+
     // For offline access
     // let url = '/assets/data/data.json';
 
@@ -36,16 +36,20 @@ export class FlightService {
     let url = [this.baseUrl, 'flight'].join('/');
 
     if (urgent) {
-      url = [this.baseUrl, 'error?code=403'].join('/');
+      url = [this.baseUrl,'error?code=403'].join('/');
     }
 
-    let params = new HttpParams().set('from', from).set('to', to);
+    let params = new HttpParams()
+      .set('from', from)
+      .set('to', to);
 
-    let headers = new HttpHeaders().set('Accept', 'application/json');
+    let headers = new HttpHeaders()
+      .set('Accept', 'application/json');
 
-    const reqObj = { params, headers };
+    const reqObj = {params, headers};
     return this.http.get<Flight[]>(url, reqObj);
     // return of(flights).pipe(delay(this.reqDelay))
+
   }
 
   findById(id: string): Observable<Flight> {
@@ -72,4 +76,5 @@ export class FlightService {
     oldDate.setTime(oldDate.getTime() + 15 * ONE_MINUTE);
     oldFlight.date = oldDate.toISOString();
   }
+
 }
