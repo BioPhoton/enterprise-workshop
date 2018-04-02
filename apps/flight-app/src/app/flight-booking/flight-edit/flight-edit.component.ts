@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {pluck, switchMap} from 'rxjs/operators';
-import {Observable} from 'rxjs/Observable';
-import {FlightService} from '@flight-workspace/flight-api';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { pluck, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { FlightService } from '@flight-workspace/flight-api';
 
 @Component({
   selector: 'app-flight-edit',
@@ -37,5 +37,4 @@ export class FlightEditComponent implements OnInit {
       )
       .subscribe(flight => this.editForm.patchValue(flight));
   }
-
 }
