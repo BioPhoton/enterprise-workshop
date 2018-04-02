@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 @Component({
   selector: 'app-flight-edit',
@@ -41,5 +41,4 @@ export class FlightEditComponent implements OnInit {
       this.showDetails = p['showDetails'];
     });
   }
-
 }

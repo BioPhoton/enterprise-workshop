@@ -1,10 +1,7 @@
-import {Component} from '@angular/core';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sidebar-cmp',
-  templateUrl: 'sidebar.component.html',
+  templateUrl: 'sidebar.component.html'
 })
-
-export class SidebarComponent {
-}
+export class SidebarComponent {}

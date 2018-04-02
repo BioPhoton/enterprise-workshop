@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {AuthService} from '../shared/services/auth.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +9,7 @@ import {AuthService} from '../shared/services/auth.service';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+
 
   needsLogin: boolean;
 
