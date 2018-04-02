@@ -8,9 +8,9 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./flight-search.component.css']
 })
 export class FlightSearchComponent implements OnInit {
-  from: string = 'Hamburg'; // in Germany
-  to: string = 'Graz'; // in Austria
-  urgent: boolean = false;
+  from= 'Hamburg'; // in Germany
+  to = 'Graz'; // in Austria
+  urgent = false;
 
   get flights() {
     return this.flightService.flights;

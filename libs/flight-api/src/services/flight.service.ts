@@ -15,11 +15,11 @@ export class FlightService {
   baseUrl: string = `http://www.angular.at/api`;
   reqDelay = 1000;
 
-  private flightsSubject: Subject<Flight[]> = new BehaviorSubject();
+  private flightsSubject: Subject<Flight[]> = new BehaviorSubject([]);
   readonly flights$: Observable<Flight[]> = this.flightsSubject.asObservable();
 
-  private isFlightsPendingSubject: Subject<boolean> = new BehaviorSubject();
-  readonly isFlightsPending$: Observable<Flight> = this.isFlightsPendingSubject.asObservable();
+  private isFlightsPendingSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  readonly isFlightsPending$: Observable<boolean> = this.isFlightsPendingSubject.asObservable();
 
   constructor(private http: HttpClient) {
   }
