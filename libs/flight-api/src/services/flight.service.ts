@@ -10,7 +10,7 @@ import { delay } from 'rxjs/operators';
 @Injectable()
 export class FlightService {
   flights: Flight[] = [];
-  baseUrl: string = `http://www.angular.at/api`;
+  baseUrl = `http://www.angular.at/api`;
   reqDelay = 1000;
 
   constructor(private http: HttpClient) {}
@@ -25,11 +25,6 @@ export class FlightService {
   }
 
   find(from: string, to: string, urgent: boolean = false): Observable<Flight[]> {
-  find(
-    from: string,
-    to: string,
-    urgent: boolean = false
-  ): Observable<Flight[]> {
     // For offline access
     // let url = '/assets/data/data.json';
 
@@ -40,9 +35,9 @@ export class FlightService {
       url = [this.baseUrl, 'error?code=403'].join('/');
     }
 
-    let params = new HttpParams().set('from', from).set('to', to);
+    const params = new HttpParams().set('from', from).set('to', to);
 
-    let headers = new HttpHeaders().set('Accept', 'application/json');
+    const headers = new HttpHeaders().set('Accept', 'application/json');
 
     const reqObj = { params, headers };
     return this.http.get<Flight[]>(url, reqObj);
@@ -65,9 +60,9 @@ export class FlightService {
   delay() {
     const ONE_MINUTE = 1000 * 60;
 
-    let oldFlights = this.flights;
-    let oldFlight = oldFlights[0];
-    let oldDate = new Date(oldFlight.date);
+    const oldFlights = this.flights;
+    const oldFlight = oldFlights[0];
+    const oldDate = new Date(oldFlight.date);
 
     // Mutable
     oldDate.setTime(oldDate.getTime() + 15 * ONE_MINUTE);

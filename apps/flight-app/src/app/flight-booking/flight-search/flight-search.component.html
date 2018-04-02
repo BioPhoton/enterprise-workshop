@@ -26,7 +26,7 @@
       <div class="form-group">
         <button (click)="search()" [disabled]="!from || !to"
           class="btn btn-default">
-          Search <b *ngIf="pending$ | async">pending</b>
+          Search <b *ngIf="isFlightsPending$ | async">pending</b>
         </button>
 
         <button *ngIf="flights.length > 0" class="btn btn-default"

@@ -109,7 +109,7 @@ export class FlightBookingEffects {
       console.log(a)
       return {
         type: 'LOAD_FLIGHTS',
-        payload: {from: a.params.from, to: a.params.to, isFlightPending: true}
+        payload: {from: a.params.from || '', to: a.params.to || '', isFlightPending: true}
       };
     },
     onError: (a: ActivatedRouteSnapshot, e: any) => {

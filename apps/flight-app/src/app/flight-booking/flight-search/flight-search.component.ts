@@ -26,7 +26,7 @@ export class FlightSearchComponent implements OnInit {
     return this.s.store.select(getFlights);
   }
 
-  get pending$() {
+  get isFlightsPending$() {
     return this.s.store.select(getIsFlightsPending);
   }
 
@@ -40,10 +40,6 @@ export class FlightSearchComponent implements OnInit {
   constructor(private flightService: FlightService, private s: DataPersistence<FlightBookingState>, private router: Router) {
   }
   ngOnInit() {
-  }
-
-  get isFlightsPending$(): Observable<boolean> {
-    return this.flightService.isFlightsPending$;
   }
 
   search(): void {

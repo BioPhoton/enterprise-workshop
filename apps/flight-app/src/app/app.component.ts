@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { DataPersistence } from '@nrwl/nx';
 import { AppState } from './+state/app.interfaces';
