@@ -9,6 +9,7 @@ import { AuthService } from '../shared/auth/services/auth.service';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+
   needsLogin: boolean;
   _userName: string = '';
 

@@ -24,7 +24,11 @@ export class FlightService {
     );
   }
 
-  find(from: string, to: string, urgent: boolean = false): Observable<Flight[]> {
+  find(
+    from: string,
+    to: string,
+    urgent: boolean = false
+  ): Observable<Flight[]> {
     // For offline access
     // let url = '/assets/data/data.json';
 
