@@ -5,7 +5,7 @@
   "projects": {
     "flight-app": {
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "apps/flight-app/src",
       "projectType": "application",
       "architect": {
         "build": {
@@ -17,16 +17,8 @@
             "tsConfig": "apps/flight-app/src/tsconfig.app.json",
             "polyfills": "apps/flight-app/src/polyfills.ts",
             "assets": [
-              {
-                "glob": "apps/flight-app/src/favicon.ico",
-                "input": "projects",
-                "output": "/"
-              },
-              {
-                "glob": "apps/flight-app/src/assets",
-                "input": "projects",
-                "output": "/"
-              }
+              "apps/flight-app/src/favicon.ico",
+              "apps/flight-app/src/assets"
             ],
             "styles": [
               "apps/flight-app/src/styles.css"
@@ -128,7 +120,7 @@
     },
     "flight-api": {
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "libs/flight-api/src",
       "projectType": "application",
       "architect": {
         "build": {
