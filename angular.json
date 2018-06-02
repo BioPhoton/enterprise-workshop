@@ -17,8 +17,16 @@
             "tsConfig": "apps/flight-app/src/tsconfig.app.json",
             "polyfills": "apps/flight-app/src/polyfills.ts",
             "assets": [
-              "apps/flight-app/src/assets",
-              "apps/flight-app/src/favicon.ico"
+              {
+                "glob": "apps/flight-app/src/favicon.ico",
+                "input": "projects",
+                "output": "/"
+              },
+              {
+                "glob": "apps/flight-app/src/assets",
+                "input": "projects",
+                "output": "/"
+              }
             ],
             "styles": [
               "apps/flight-app/src/styles.css"
