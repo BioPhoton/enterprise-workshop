@@ -1,0 +1,14 @@
+{
+  "npmScope": "enterprise-workshop",
+  "projects": {
+    "flight-app": {
+      "tags": []
+    },
+    "flight-app-e2e": {
+      "tags": []
+    },
+    "flight-api": {
+      "tags": []
+    }
+  }
+}

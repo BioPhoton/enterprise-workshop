@@ -1,12 +1,14 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "",
   "projects": {
     "flight-app": {
-      "root": "",
+      "root": "apps/flight-app/",
       "sourceRoot": "apps/flight-app/src",
       "projectType": "application",
+      "prefix": "enterprise-workshop",
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -14,8 +16,8 @@
             "outputPath": "dist/apps/flight-app",
             "index": "apps/flight-app/src/index.html",
             "main": "apps/flight-app/src/main.ts",
-            "tsConfig": "apps/flight-app/src/tsconfig.app.json",
             "polyfills": "apps/flight-app/src/polyfills.ts",
+            "tsConfig": "apps/flight-app/tsconfig.app.json",
             "assets": [
               "apps/flight-app/src/favicon.ico",
               "apps/flight-app/src/assets"
@@ -27,6 +29,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/flight-app/src/environments/environment.ts",
+                  "with": "apps/flight-app/src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -35,13 +43,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "fileReplacements": [
-                {
-                  "replace": "apps/flight-app/src/environments/environment.ts",
-                  "with": "apps/flight-app/src/environments/environment.prod.ts"
-                }
-              ]
+              "buildOptimizer": true
             }
           }
         },
@@ -65,17 +67,17 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "apps/flight-app/src/../../../test.js",
-            "karmaConfig": "./karma.conf.js",
+            "main": "apps/flight-app/src/test.ts",
             "polyfills": "apps/flight-app/src/polyfills.ts",
-            "tsConfig": "apps/flight-app/src/../../../tsconfig.spec.json",
-            "scripts": [],
+            "tsConfig": "apps/flight-app/tsconfig.spec.json",
+            "karmaConfig": "apps/flight-app/karma.conf.js",
             "styles": [
               "apps/flight-app/src/styles.css"
             ],
+            "scripts": [],
             "assets": [
-              "apps/flight-app/src/assets",
-              "apps/flight-app/src/favicon.ico"
+              "apps/flight-app/src/favicon.ico",
+              "apps/flight-app/src/assets"
             ]
           }
         },
@@ -83,8 +85,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "./tsconfig.spec.json",
-              "apps/flight-app/src/tsconfig.app.json"
+              "apps/flight-app/tsconfig.app.json",
+              "apps/flight-app/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -94,23 +96,20 @@
       }
     },
     "flight-app-e2e": {
-      "root": "",
-      "sourceRoot": "",
+      "root": "apps/flight-app-e2e/",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
+            "protractorConfig": "apps/flight-app-e2e/protractor.conf.js",
             "devServerTarget": "flight-app:serve"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/flight-app/e2e/tsconfig.e2e.json"
-            ],
+            "tsConfig": "apps/flight-app-e2e/tsconfig.e2e.json",
             "exclude": [
               "**/node_modules/**"
             ]
@@ -119,157 +118,25 @@
       }
     },
     "flight-api": {
-      "root": "",
+      "root": "libs/flight-api",
       "sourceRoot": "libs/flight-api/src",
-      "projectType": "application",
+      "projectType": "library",
+      "prefix": "enterprise-workshop",
       "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/",
-            "index": "libs/flight-api/src/index.html",
-            "main": "libs/flight-api/src/main.ts",
-            "tsConfig": "libs/flight-api/src/tsconfig.app.json",
-            "assets": [],
-            "styles": [],
-            "scripts": []
-          },
-          "configurations": {}
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "flight-api:build"
-          },
-          "configurations": {}
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "flight-api:build"
-          }
-        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/flight-api/src/../../../test.js",
-            "karmaConfig": "./karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": []
+            "main": "libs/flight-api/src/test.ts",
+            "tsConfig": "libs/flight-api/tsconfig.spec.json",
+            "karmaConfig": "libs/flight-api/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "./tsconfig.spec.json",
-              "apps/flight-app/src/tsconfig.app.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "flight-api-e2e": {
-      "root": "",
-      "sourceRoot": "",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "flight-api:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/flight-app/e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "logger": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/",
-            "index": "libs/logger/src/index.html",
-            "main": "libs/logger/src/main.ts",
-            "tsConfig": "libs/logger/src/tsconfig.app.json",
-            "assets": [],
-            "styles": [],
-            "scripts": []
-          },
-          "configurations": {}
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "logger:build"
-          },
-          "configurations": {}
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "logger:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/logger/src/../../../test.js",
-            "karmaConfig": "./karma.conf.js",
-            "scripts": [],
-            "styles": [],
-            "assets": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "./tsconfig.spec.json",
-              "apps/flight-app/src/tsconfig.app.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "logger-e2e": {
-      "root": "",
-      "sourceRoot": "",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "logger:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/flight-app/e2e/tsconfig.e2e.json"
+              "libs/flight-api/tsconfig.lib.json",
+              "libs/flight-api/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -279,19 +146,12 @@
       }
     }
   },
-  "defaultProject": "flight-app",
   "cli": {
     "warnings": {
-      "typescriptMismatch": false
-    }
-  },
-  "schematics": {
-    "@nrwl/schematics:component": {
-      "prefix": "app",
-      "styleext": "css"
+      "typescriptMismatch": false,
+      "versionMismatch": false
     },
-    "@nrwl/schematics:directive": {
-      "prefix": "app"
-    }
-  }
+    "defaultCollection": "@nrwl/schematics"
+  },
+  "defaultProject": "flight-app"
 }

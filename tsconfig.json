@@ -18,6 +18,9 @@
     "paths": {
       "@flight-workspace/*": [
         "libs/*"
+      ],
+      "@flight-workspace/flight-api": [
+        "libs/flight-api/src/index.ts"
       ]
     }
   },
